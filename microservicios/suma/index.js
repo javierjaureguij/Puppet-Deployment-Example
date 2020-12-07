@@ -19,7 +19,7 @@ router.post('/post/suma', function(req, res) {
 	let operador2 = req.body.operador2;
 
 	res.send({
-		resultado: operador1 - operador2
+		resultado: operador1 + operador2
 	});
 
 });
