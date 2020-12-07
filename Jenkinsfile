@@ -21,7 +21,7 @@ pipeline {
 			steps {
 				echo 'deploy'
 				sh '''
-					docker-compose up Suma -d
+					docker-compose up -d Suma
 				''' 
 			}
 		}
