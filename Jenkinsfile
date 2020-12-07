@@ -3,7 +3,9 @@ pipeline {
 	stages {
 		stage("build") {
 			steps {
-				docker ps
+				sh '''
+					docker-compose version
+				'''
 				echo 'build'
 			}
 		}
