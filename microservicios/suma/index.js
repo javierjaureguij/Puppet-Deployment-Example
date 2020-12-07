@@ -18,9 +18,9 @@ router.post('/post/suma', function(req, res) {
 	let operador1 = parseInt(req.body.operador1);
 	let operador2 = parseInt(req.body.operador2);
 
-	res.send({
-		resultado: operador1 + operador2
-	});
+	/*res.send({
+		resultado: operador1 - operador2
+	});*/
 
 });
 
