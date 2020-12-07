@@ -3,20 +3,26 @@ pipeline {
 	stages {
 		stage("build") {
 			steps {
-				sh '''
-					docker-compose version
-				'''
 				echo 'build'
+				sh '''
+					docker-compose build
+				'''
 			}
 		}
 		stage("test") {
 			steps {
 				echo 'test'
+				sh '''
+					docker-compose up SumaTest
+				'''
 			}
 		}
 		stage("deploy") {
 			steps {
 				echo 'deploy'
+				sh '''
+					docker-compose up Suma
+				''' 
 			}
 		}
 	}

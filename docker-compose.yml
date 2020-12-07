@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  SumaTest:
+    container_name: sumatest
+    image: jjauregui1996/sumatest:latest
+    build:
+      dockerfile: Dockerfile.test
+      context: ./microservicios/suma
+
+  Suma:
+    container_name: suma
+    image: jjauregui1996/suma:latest
+    build:
+      dockerfile: Dockerfile
+      context: ./microservicios/suma
+    ports:
+      - '8090:8080'

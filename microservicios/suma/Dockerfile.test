@@ -1,0 +1,8 @@
+FROM node
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+RUN npm install -g mocha
+COPY . .
+EXPOSE 8080
+CMD ["mocha", "test/test.js", "--timeout", "60000", "--exit"]
