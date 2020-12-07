@@ -8,7 +8,7 @@ const app = express();
 
 /* CONFIGURACIONES */
 
-const API_CONFIG_PUERTO = 8090
+const API_CONFIG_PUERTO = 8080
 
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
