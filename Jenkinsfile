@@ -13,7 +13,7 @@ pipeline {
 			steps {
 				echo 'test'
 				sh '''
-					docker-compose up --exit-code-from SumaTest SumaTest
+					docker-compose up --force-recreate --exit-code-from SumaTest SumaTest
 				'''
 			}
 		}
@@ -21,8 +21,8 @@ pipeline {
 			steps {
 				echo 'deploy'
 				sh '''
-					docker-compose up -d Suma
-					docker-compose up -d SitioWeb
+					docker-compose up -d --force-recreate Suma
+					docker-compose up -d --force-recreate SitioWeb
 				''' 
 			}
 		}
