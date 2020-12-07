@@ -15,8 +15,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 router.post('/post/suma', function(req, res) {
-	let operador1 = req.body.operador1;
-	let operador2 = req.body.operador2;
+	let operador1 = parseInt(req.body.operador1);
+	let operador2 = parseInt(req.body.operador2);
 
 	res.send({
 		resultado: operador1 + operador2
