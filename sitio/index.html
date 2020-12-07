@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Practica 1</title>
+        <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+              crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>Practica 1</h1>
+        <div>
+            <label>Operador 1:</label>
+            <input type="number" id="txtOperador1">
+            <br>
+            <label>Operador 2:</label>
+            <input type="number" id="txtOperador2">
+            <br>
+            <button id="btnSumar">Sumar</button>
+            <br>
+            <br>
+            <label style="font-weight: bold;">Resultado: </label>
+            <label id="lbResultado"></label>
+        </div>
+    </body>
+    <script>
+        $("#btnSumar").click(function() {
+            let operador1 = $("#txtOperador1").val();
+            let operador2 = $("#txtOperador2").val();
+            $.ajax({
+                type: "POST",
+                url: "http://0.0.0.0:8090/post/suma",
+                dataType:"json",
+                contentType: 'application/x-www-form-urlencoded',
+                data: {operador1:operador1, operador2:operador2},
+                success: function(data) {
+                    $("#lbResultado").text(data.resultado);
+                }
+            });
+        });
+    </script>
+</html>

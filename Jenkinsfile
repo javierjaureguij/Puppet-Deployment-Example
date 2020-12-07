@@ -22,6 +22,7 @@ pipeline {
 				echo 'deploy'
 				sh '''
 					docker-compose up -d Suma
+					docker-compose up -d Sitioweb
 				''' 
 			}
 		}

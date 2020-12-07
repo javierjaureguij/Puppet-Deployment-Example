@@ -15,3 +15,12 @@ services:
       context: ./microservicios/suma
     ports:
       - '8090:8080'
+
+  SitioWeb:
+    container_name: sitioweb
+    image: jjauregui1996/sitioweb:latest
+    build:
+      dockerfile: Dockerfile
+      context: ./sitio
+    ports:
+      - '8091:80'
