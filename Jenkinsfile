@@ -12,9 +12,6 @@ pipeline {
 		stage("test") {
 			steps {
 				echo 'test'
-				sh '''
-					docker-compose up --force-recreate --exit-code-from SumaTest SumaTest
-				'''
 			}
 		}
 		stage("deploy") {
