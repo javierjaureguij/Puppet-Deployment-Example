@@ -17,10 +17,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 router.post('/post/suma', function(req, res) {
 	let operador1 = parseInt(req.body.operador1);
 	let operador2 = parseInt(req.body.operador2);
-	/*res.send({
+	res.send({
 		resultado: operador1 - operador2
-	});*/
-
+	});
 });
 
 /* PUBLICACIÓN */
