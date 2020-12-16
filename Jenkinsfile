@@ -69,7 +69,7 @@ pipeline {
 					scp .env jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 					scp docker-compose.yml jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 					scp deployments.txt jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
-					scp site.pp jenkins@{PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
+					scp site.pp jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 
 					ssh jenkins@${PUPPET_MASTER_URL} sudo mv ${PUPPET_MASTER_HOME}/.env ${PUPPET_MASTER_DEV_FILES_DIR}/
 					ssh jenkins@${PUPPET_MASTER_URL} sudo mv ${PUPPET_MASTER_HOME}/docker-compose.yml ${PUPPET_MASTER_DEV_FILES_DIR}/
