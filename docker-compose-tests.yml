@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  SumaTest:
+    container_name: sumatest
+    image: jjauregui1996/sumatest:latest
+    build:
+      dockerfile: Dockerfile.test
+      context: ./microservicios/suma

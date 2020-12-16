@@ -1,28 +1,89 @@
 pipeline {
 	agent any
+	environment {
+        DOCKERHUB_USER     = credentials('dockerhub_user')
+        DOCKERHUB_PASSWORD = credentials('dockerhub_password')
+		PUPPET_MASTER_URL  = '35.184.65.50'
+		PUPPET_MASTER_HOME = '/home/jenkins'
+		PUPPET_MASTER_DEV_FILES_DIR = '/etc/puppet/code/environments/production/modules/mymodule/files'
+		PUPPET_MASTER_PROD_FILES_DIR = '/etc/puppet/code/environments/production/modules/mymodule/files'
+    }
 	stages {
-		stage("build") {
+		stage("BuildTests") {
+			when {
+				branch 'develop'
+			}
 			steps {
-				echo 'build'
+				echo 'Building tests...'
 				sh '''
+					docker-compose -f docker-compose-tests.yml down
+					docker-compose -f docker-compose-tests.yml build
+				'''
+			}
+		}
+		stage("RunTests") {
+			when {
+				branch 'develop'
+			}
+			steps {
+				echo 'Running tests...'
+				sh '''
+					docker-compose -f docker-compose-tests.yml up --exit-code-from SumaTest SumaTest
+				'''
+			}
+		}
+		stage("Build") {
+			when {
+				branch 'develop'
+			}
+			steps {
+				echo 'Building docker images for deployment...'
+				sh '''
+					docker-compose down
 					docker-compose build
 				'''
 			}
 		}
-		stage("test") {
+		stage("PushBuilds") {
+			when {
+				branch 'develop'
+			}
 			steps {
-				echo 'test'
+				echo "Pushing docker images to DockerHub..."
 				sh '''
-					docker-compose up --force-recreate --exit-code-from SumaTest SumaTest
+					docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+					docker-compose push
 				'''
 			}
 		}
-		stage("deploy") {
+		stage("DeployDev") {
+			when {
+				branch 'develop'
+			}
 			steps {
-				echo 'deploy'
+				echo "Deploying to development..."
 				sh '''
-					docker-compose up -d --force-recreate Suma
-					docker-compose up -d --force-recreate SitioWeb
+					echo "PORT_SITIO = 8081" > .env
+					echo "New deployment" >> deploys.txt
+					scp .env jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
+					scp docker-compose.yml jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
+					scp deploys.txt jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
+
+					ssh sudo mv ${PUPPET_MASTER_HOME}/.env ${PUPPET_MASTER_DEV_FILES_DIR}/
+					ssh sudo mv ${PUPPET_MASTER_HOME}/docker-compose.yml ${PUPPET_MASTER_DEV_FILES_DIR}/
+					ssh sudo mv ${PUPPET_MASTER_HOME}/deploys.txt ${PUPPET_MASTER_DEV_FILES_DIR}/
+
+				'''
+			}
+		}
+		stage("DeployProd") {
+			when {
+				branch 'master'
+			}
+			steps {
+				echo 'Deploying to production...'
+				sh '''
+					echo "PORT_SITIO = 8082" > .env
 				''' 
 			}
 		}

@@ -1,12 +1,5 @@
 version: '3.7'
 services:
-  SumaTest:
-    container_name: sumatest
-    image: jjauregui1996/sumatest:latest
-    build:
-      dockerfile: Dockerfile.test
-      context: ./microservicios/suma
-
   Suma:
     container_name: suma
     image: jjauregui1996/suma:latest
@@ -23,4 +16,4 @@ services:
       dockerfile: Dockerfile
       context: ./sitio
     ports:
-      - '8091:80'
+      - '${PORT_SITIO}:80'
