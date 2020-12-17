@@ -10,11 +10,5 @@ class mymodule {
                 owner => 'jenkins',
                 source => 'puppet:///modules/mymodule/docker-compose.yml',
         }
-
-        file { '/home/jenkins/.env':
-                mode => '0644',
-                owner => 'jenkins',
-                source => 'puppet:///modules/mymodule/.env',
-        }
-
+		
 }

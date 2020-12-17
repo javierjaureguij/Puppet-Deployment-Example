@@ -16,4 +16,4 @@ services:
       dockerfile: Dockerfile
       context: ./sitio
     ports:
-      - '${PORT_SITIO}:80'
+      - '8082:80'

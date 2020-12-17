@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  Suma:
+    container_name: suma
+    image: jjauregui1996/suma:latest
+    build:
+      dockerfile: Dockerfile
+      context: ./microservicios/suma
+    ports:
+      - '8090:8080'
+
+  SitioWeb:
+    container_name: sitioweb
+    image: jjauregui1996/sitioweb:latest
+    build:
+      dockerfile: Dockerfile
+      context: ./sitio
+    ports:
+      - '8081:80'

@@ -76,11 +76,8 @@ pipeline {
 
 					echo "New deployment" >> deployments.txt
 					scp deployments.txt jenkins@${PUPPET_AGENT_URL_DEV}:${PUPPET_AGENT_HOME}/
-
-					echo "PORT_SITIO = 8081" > .env
-					scp .env jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
-
-					scp docker-compose.yml jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
+					
+					scp docker-compose-dev.yml jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/docker-compose.yml
 					scp site.pp jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 					scp init.pp jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 
@@ -104,10 +101,7 @@ pipeline {
 					echo "New deployment" >> deployments.txt
 					scp deployments.txt jenkins@${PUPPET_AGENT_URL_PROD}:${PUPPET_AGENT_HOME}/
 
-					echo "PORT_SITIO = 8082" > .env
-					scp .env jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
-
-					scp docker-compose.yml jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
+					scp docker-compose-prod.yml jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/docker-compose.yml
 					scp site.pp jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 					scp init.pp jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 
