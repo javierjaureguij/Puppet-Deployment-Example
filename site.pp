@@ -1,6 +1,6 @@
 include mymodule
 exec {'test_docker':
-  command => "/bin/bash -c 'docker rm $(docker ps -aq) -f'",
+  command => "/bin/bash -c 'docker rm $(docker ps -aq) -f' || true",
   onlyif => "/bin/bash -c 'test -e /home/jenkins/deployments.txt'",
   notify  => Exec['remove_flag_file'],
 }
