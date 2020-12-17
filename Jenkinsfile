@@ -65,7 +65,9 @@ pipeline {
 				echo "Deploying to development..."
 				sh '''
 					echo "PORT_SITIO = 8081" > .env
-					echo "New deployment" >> deployments.txt
+
+					echo "New deployment" > deployments.txt
+
 					scp .env jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 					scp docker-compose.yml jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
 					scp deployments.txt jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
