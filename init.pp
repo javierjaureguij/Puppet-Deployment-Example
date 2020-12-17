@@ -21,7 +21,6 @@ class mymodule {
                 mode => '0644',
                 owner => 'jenkins',
                 source => 'puppet:///modules/mymodule/deployments.txt',
-				unless => "/bin/bash -c 'test -e /home/jenkins/deployments.txt'",
         }
 
 }
