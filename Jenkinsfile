@@ -62,7 +62,7 @@ pipeline {
 				echo "Pushing docker images to DockerHub..."
 				sh '''
 					docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-					docker-compose push
+					docker-compose -f docker-compose-dev.yml push
 				'''
 			}
 		}
