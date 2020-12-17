@@ -17,10 +17,4 @@ class mymodule {
                 source => 'puppet:///modules/mymodule/.env',
         }
 
-        file { '/home/jenkins/deployments.txt':
-                mode => '0644',
-                owner => 'jenkins',
-                source => 'puppet:///modules/mymodule/deployments.txt',
-        }
-
 }
