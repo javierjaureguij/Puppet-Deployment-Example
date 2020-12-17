@@ -71,8 +71,8 @@ pipeline {
 				echo "Deploying to development..."
 				sh '''
 
-					echo "New deployment" >> deploys.txt
-					scp deploys.txt jenkins@${PUPPET_AGENT_URL_DEV}:${PUPPET_AGENT_HOME}/
+					echo "New deployment" >> deployments.txt
+					scp deployments.txt jenkins@${PUPPET_AGENT_URL_DEV}:${PUPPET_AGENT_HOME}/
 
 					echo "PORT_SITIO = 8081" > .env
 					scp .env jenkins@${PUPPET_MASTER_URL}:${PUPPET_MASTER_HOME}/
