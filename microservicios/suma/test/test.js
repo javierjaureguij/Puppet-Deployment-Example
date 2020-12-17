@@ -18,7 +18,7 @@ describe('Realizando test unitario de suma... ', () => {
             })
 			.end(function(err, res) {
 				console.log(res.body)
-                expect(res.body.resultado).to.equal(100); // Se espera que el resultado sea 100.
+                expect(res.body.resultado).to.equal(50); // Se espera que el resultado sea 100.
 				done();
 			});
 	});
