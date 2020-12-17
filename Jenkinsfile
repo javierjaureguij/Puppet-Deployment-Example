@@ -49,8 +49,8 @@ pipeline {
 			steps {
 				echo 'Building docker images for deployment...'
 				sh '''
-					docker-compose down
-					docker-compose build
+					docker-compose -f docker-compose-dev down
+					docker-compose -f docker-compose-dev build
 				'''
 			}
 		}
