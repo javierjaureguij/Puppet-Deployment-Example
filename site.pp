@@ -32,7 +32,7 @@ exec {'pull_docker_images':
   cwd => "/home/jenkins/",
   onlyif => "/bin/bash -c 'test -e /home/jenkins/deployments.txt'",
   refreshonly => true,
-  notify  => Exec['up_docker_images],
+  notify  => Exec['up_docker_images'],
 }
 
 exec {'up_docker_images':
